@@ -1,5 +1,6 @@
 package com.youssefgirgeis.loginscreen;
 
+import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -12,6 +13,8 @@ import android.widget.TextView;
 public class MainActivity extends AppCompatActivity {
 
     private static final String TAG = "LoginApp";
+    private int attemptsCounter = 3;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -19,32 +22,37 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         Button loginButton = (Button) findViewById(R.id.loginButton);
-        loginButton.setOnClickListener(onClickLoginButton);
+
     }
 
-    private View.OnClickListener onClickLoginButton = new View  .OnClickListener(){
+    public void onBtnClicked(View v){
+        EditText userNameEditText = (EditText) findViewById(R.id.usernameEditText);
+        EditText passwordEditText = (EditText) findViewById(R.id.passwordEditText);
+        TextView errorTextView = (TextView) findViewById(R.id.errorTextView);
 
-        @Override
-        public void onClick(View view) {
+        String userName = userNameEditText.getText().toString();
+        String password = passwordEditText.getText().toString();
 
-            EditText userNameEditText = (EditText) findViewById(R.id.usernameEditText);
-            EditText passwordEditText = (EditText) findViewById(R.id.passwordEditText);
-            TextView errorTextView = (TextView) findViewById(R.id.errorTextView);
+        LoginManager loginManager = new LoginManager(userName, password);
 
-            String userName = userNameEditText.getText().toString();
-            String password = passwordEditText.getText().toString();
+        if(loginManager.hasValidCredentials()){
 
-            LoginManager loginManager = new LoginManager(userName, password);
+            attemptsCounter = 3;
+            errorTextView.setVisibility(View.INVISIBLE);
 
-            if(loginManager.hasValidCredentials()){
+        } else{
+            attemptsCounter--;
 
-                errorTextView.setVisibility(View.INVISIBLE);
+            String error = getResources().getString(R.string.invalid_login, attemptsCounter);
+            errorTextView.setText(error);
+            errorTextView.setVisibility(View.VISIBLE);
 
-            } else{
-                errorTextView.setText(R.string.invalid_login);
-                errorTextView.setVisibility(View.VISIBLE);
-
+            Button loginBtn = (Button) findViewById(R.id.loginButton);
+            if(attemptsCounter == 0){
+                loginBtn.setBackgroundColor(Color.GRAY);
+                loginBtn.setEnabled(false);
             }
         }
-    };
+
+    }
 }
