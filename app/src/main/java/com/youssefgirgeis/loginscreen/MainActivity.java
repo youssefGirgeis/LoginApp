@@ -26,6 +26,7 @@ public class MainActivity extends AppCompatActivity {
 
         @Override
         public void onClick(View view) {
+
             EditText userNameEditText = (EditText) findViewById(R.id.usernameEditText);
             EditText passwordEditText = (EditText) findViewById(R.id.passwordEditText);
             TextView errorTextView = (TextView) findViewById(R.id.errorTextView);
@@ -33,7 +34,9 @@ public class MainActivity extends AppCompatActivity {
             String userName = userNameEditText.getText().toString();
             String password = passwordEditText.getText().toString();
 
-            if(userName.equals("admin") && password.equals("admin")){
+            LoginManager loginManager = new LoginManager(userName, password);
+
+            if(loginManager.hasValidCredentials()){
 
                 errorTextView.setVisibility(View.INVISIBLE);
 
