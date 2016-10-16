@@ -74,6 +74,19 @@
         android:layout_marginTop="59dp" />
 
     <TextView
+        android:text="TextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/loginButton"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="70dp"
+        android:id="@+id/errorTextView"
+        android:textSize="16sp"
+        android:textColor="@color/error_text"
+        android:visibility="invisible"
+        />
+
+    <TextView
         android:text="Version: 1.0"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
