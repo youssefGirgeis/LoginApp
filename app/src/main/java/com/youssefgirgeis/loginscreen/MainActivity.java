@@ -6,6 +6,8 @@ import android.util.Log;
 import android.util.StringBuilderPrinter;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -24,7 +26,22 @@ public class MainActivity extends AppCompatActivity {
 
         @Override
         public void onClick(View view) {
-            
+            EditText userNameEditText = (EditText) findViewById(R.id.usernameEditText);
+            EditText passwordEditText = (EditText) findViewById(R.id.passwordEditText);
+            TextView errorTextView = (TextView) findViewById(R.id.errorTextView);
+
+            String userName = userNameEditText.getText().toString();
+            String password = passwordEditText.getText().toString();
+
+            if(userName.equals("admin") && password.equals("admin")){
+
+                errorTextView.setVisibility(View.INVISIBLE);
+
+            } else{
+                errorTextView.setText(R.string.invalid_login);
+                errorTextView.setVisibility(View.VISIBLE);
+
+            }
         }
     };
 }
