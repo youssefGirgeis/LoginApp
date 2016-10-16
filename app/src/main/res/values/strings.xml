@@ -4,5 +4,5 @@
     <string name="password_hint">Password</string>
     <string name="login_button">Login</string>
     <string name="header_text">Please login &#8230;</string>
-    <string name="invalid_login">Invalid login credentials</string>
+    <string name="invalid_login">Invalid login credentials. You have only 3 attempts to login, you have left with %1$d attempts</string>
 </resources>
